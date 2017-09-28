@@ -8,7 +8,7 @@ Reproducibility is essential for reliable scientific discovery. Assessment of re
 Examples
 
 # load chip_seq data
-data(chip_seq)
+data(chip_seq) \n
 x = chip_seq[,1]
 y = chip_seq[,2]
 

@@ -8,8 +8,11 @@ Reproducibility is essential for reliable scientific discovery. Assessment of re
 
 # Intallation
 Install `gIDR` through CRAN or <br />
-Download from [gIDR_0.1.0.tar.gz](https://github.com/MonkeyLB/gIDR/blob/master/gIDR_0.1.0.tar.gz) <br />
-And install with commandline: <br />
+
+Download the source package: [gIDR_0.1.0.tar.gz](https://github.com/MonkeyLB/gIDR/blob/master/gIDR_0.1.0.tar.gz) <br />
+
+and install with commandline: <br />
+
 `R CMD INSTALL gIDR_0.1.0.tar.gz`
  
 # Examples

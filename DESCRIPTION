@@ -1,0 +1,13 @@
+Package: gIDR
+Type: Package
+Title: Generalized irreproducibile discovery rate
+Version: 0.1.0
+Author: Qunhua Li, Tao Yang 
+Maintainer: Tao Yang <xadmyangt@gmail.com>
+Description: Reproducibility is essential for reliable scientific discovery. Assessment of reproducibility often involves characterizing the concordance of ranked candidate lists from replicate experiments. Li et al (2011) developed a copula mixture model to assess the reproducibility of findings from  high-throughput experiments. The R package `idr` implemented the method. Despite its broad application, it is not applicable when a large number of  ties are present or when a considerable proportion of candidates are unobserved in one replicate, for example, being truncated by a significance threshold.  Here we present `gIDR`, that implements a method to handle discreteness and truncation in the ranked lists using a latent variable approach. The generalized method not only allows ties and partially replicated candidates, but also is able to identify substantially more real signals and produce better calibrated error rate than the existing method. 
+Depends: R (>= 3.3)
+Imports: stats, cubature, idr
+License: GPL (>2.0)
+Encoding: UTF-8
+LazyData: true
+RoxygenNote: 6.0.1

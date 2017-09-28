@@ -1,0 +1,3 @@
+importFrom("stats", "ecdf", "pnorm", "uniroot")
+importFrom("cubature", "adaptIntegrate")
+exportPattern("^[[:alpha:]]+")

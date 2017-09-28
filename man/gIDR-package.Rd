@@ -56,10 +56,7 @@ gidr.out <- est.IDR.discrete(x, y, mu, sigma, rho, p, eps, n.missing,
                              as.single.em = 1, common.only=TRUE, labels=NULL)
 
 names(gidr.out)
-
-# Select reproducible observations
-library(idr)
-select.IDR(chip_seq, gidr.out$IDR.obs, 0.01)
+select.gIDR(chip_seq, gidr.out$IDR.obs, 0.01)
 }
 \author{
 Qunhua Li, Tao Yang

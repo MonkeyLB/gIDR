@@ -116,9 +116,7 @@ est.IDR.discrete <- function(x, y, mu, sigma, rho, p, eps, n.missing, miss.sym, 
 
     i <- 1
     j <- j+1
-    #  print
-    cat("\nj=", j, "\n")
-    cat("EM: loglik.inner.trace\n")
+
 
     para.old <- para
     loglik.inner.trace[1] <- l.new.outer
@@ -132,31 +130,17 @@ est.IDR.discrete <- function(x, y, mu, sigma, rho, p, eps, n.missing, miss.sym, 
       # EM for latent structure
       para <- em.step.2normal.discrete(cbind(z1.lo, z1.up), cbind(z2.lo, z2.up), para$m, para$mu, para$sigma, para$rho, para$p, as.single.em, top.missing)
 
-      #################
-      # fix sigma
-      # para$sigma <- sigma
-      ################
-      # this is just the mixture likelihood of two-component Gaussian
       loglik.inner.trace[i] <- loglik.2binormal.discrete(cbind(z1.lo, z1.up), cbind(z2.lo, z2.up), para$m, para$mu, para$sigma, para$rho, para$p, as.single.loglik, top.missing)
-
-      # print likelihood
-      #    cat("i=", i, ": ", loglik.inner.trace[i], "\n")
-      #    cat("mu=", para$mu, "sigma=", para$sigma, "p=", para$p, "rho=", para$rho, "n.missing=", para$m[1], "\n")
-      cat("EM ends\n")
 
       if(abs(loglik.inner.trace[i]-loglik.inner.trace[i-1])<=eps | i > 100 | para$p>0.999 | para$p<0.001 | para$rho>0.999 | para$rho < -0.999)
         to.run.EM <- FALSE
     }
 
-    #   cat("\nout of EM loop, in pseudo-value\n")
-    # update pseudo values
-    # If new likelihood is lower than previous one, use mid-point between
-    # new and old
+
     to.run.outer <- T  # always run the first iteration
     k <- 0
     while(to.run.outer & k<10){
 
-      #     xy.cat <- get.cat.xy(x, y, para$m[1], miss.sym, top.missing)
       if(!is.null(labels))
         xy.cat <- get.cat.xy(x, y, n.missing, miss.sym, top.missing, labels)
       else{
@@ -173,7 +157,7 @@ est.IDR.discrete <- function(x, y, mu, sigma, rho, p, eps, n.missing, miss.sym, 
 
       l.new.outer <- loglik.2binormal.discrete(cbind(z1.lo, z1.up), cbind(z2.lo, z2.up), para$m, para$mu, para$sigma, para$rho, para$p, as.single.loglik, top.missing)
 
-      cat("l.new.outer=",l.new.outer, " loglik.inner.trace[1]=", loglik.inner.trace[1], "\n")
+
       if(l.new.outer < loglik.inner.trace[1]-eps){ # if likelihood is small, only go half step
         para$m <- (para$m+para.old$m)/2
         para$mu <- (para$mu+para.old$mu)/2
@@ -185,8 +169,6 @@ est.IDR.discrete <- function(x, y, mu, sigma, rho, p, eps, n.missing, miss.sym, 
         to.run.outer <- FALSE # no need to adjust step
       }
 
-      cat("k=", k, "\n")
-      # if still cann't be better than old version, just use the old one
       if(k>= 10){
         para$m <- para.old$m
         para$mu <- para.old$mu
@@ -216,17 +198,11 @@ est.IDR.discrete <- function(x, y, mu, sigma, rho, p, eps, n.missing, miss.sym, 
 
     loglik.trace[j] <- l.new.outer
 
-    cat("loglik.outer.trace=", loglik.trace[j])
-    cat("\n\n")
-
     # stop when iteration>50
     if(j > 50 | abs(loglik.trace[j] - loglik.trace[j-1])< eps)
       to.run <- FALSE
-    #    else
-    #        to.run <- l.new.outer - l.old.outer > eps
   }
 
-  #  cat("\nI am here\n", "to.run=", to.run)
   if(top.missing)
     n.est.missing <- para$m[1]
   else

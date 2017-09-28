@@ -20,6 +20,16 @@ and install with commandline: <br />
 load chip_seq data
 ```
 data(chip_seq)
+head(chip_seq)
+
+#      x  y
+#[1,]  4  2
+#[2,]  0 16
+#[3,] 11 14
+#[4,]  2  0
+#[5,]  7  5
+#[6,]  1  0
+
 x = chip_seq[,1]
 y = chip_seq[,2]
 ```

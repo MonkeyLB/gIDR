@@ -53,5 +53,5 @@ names(gidr.out)
 Select reproducible observations
 ```
 library(idr)
-select.IDR(chip_seq, gidr.out$IDR.obs, 0.01)
+select.gIDR(chip_seq, gidr.out$IDR.obs, 0.01)
 ```
